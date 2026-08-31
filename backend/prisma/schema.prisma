@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String     @id @default(uuid())
+  email       String     @unique
+  password    String
+  displayName String?
+  role        UserRole   @default(PLAYER)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  characters  Character[]
+}
+
+enum UserRole {
+  PLAYER
+  ADMIN
+}
+
+model Character {
+  id            String   @id @default(uuid())
+  user          User     @relation(fields: [userId], references: [id])
+  userId        String
+  prenom        String
+  nom           String
+  surnom        String?
+  genre         String?
+  dateNaissance DateTime?
+  age           Int?
+  apparence     Json?
+  taille        Float?
+  histoire      String?
+  situationFamiliale String?
+  situationFinanciere Json?
+  career        Career?  @relation(fields: [careerId], references: [id])
+  careerId      String?
+  location      Location? @relation(fields: [locationId], references: [id])
+  locationId    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  memories      Memory[]
+}
+
+model Career {
+  id        String  @id @default(uuid())
+  key       String  @unique
+  title     String
+  category  String
+  salary    Int
+  minAge    Int?    // âge minimum recommandé pour ce métier
+  skills    Json?
+  equipment Json?
+  createdAt DateTime @default(now())
+}
+
+model Location {
+  id     String @id @default(uuid())
+  name   String @unique
+  type   String
+  coords Json?
+}
+
+model Scene {
+  id         String   @id @default(uuid())
+  title      String
+  contexte   String?
+  location   Location? @relation(fields: [locationId], references: [id])
+  locationId String?
+  state      Json?
+  createdAt  DateTime @default(now())
+}
+
+model Memory {
+  id        String @id @default(uuid())
+  ownerType String
+  ownerId   String
+  content   String
+  meta      Json?
+  createdAt DateTime @default(now())
+}
+
+// Minimal placeholders for other systems
+model Inventory { id String @id @default(uuid()) }
+model Item { id String @id @default(uuid()) }
+model Vehicle { id String @id @default(uuid()) }
+model Property { id String @id @default(uuid()) }
+model BankAccount { id String @id @default(uuid()) }
+model Transaction { id String @id @default(uuid()) }
+model Notification { id String @id @default(uuid()) }
+model Evidence { id String @id @default(uuid()) }
+model Investigation { id String @id @default(uuid()) }
