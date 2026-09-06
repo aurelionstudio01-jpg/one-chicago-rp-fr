@@ -1,0 +1,138 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: var(--color-background);
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.app-header h1 {
+  font-size: 2.5em;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+}
+
+.app-header p {
+  font-size: 1.1em;
+  color: var(--color-secondary);
+}
+
+.app-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+  .app-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.status-card,
+.features-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.status-card:hover,
+.features-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(255, 68, 68, 0.2);
+}
+
+.status-card h2,
+.features-card h2 {
+  color: var(--color-primary);
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+.status-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: rgba(0, 153, 255, 0.1);
+  border-left: 3px solid var(--color-secondary);
+  border-radius: 4px;
+}
+
+.status-item label {
+  font-weight: 600;
+  color: var(--color-secondary);
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+.status-badge.success {
+  background-color: var(--color-success);
+  color: #000;
+}
+
+.error {
+  background-color: rgba(255, 68, 68, 0.1);
+  border-left: 3px solid var(--color-primary);
+  padding: 15px;
+  border-radius: 4px;
+  color: #ff8888;
+}
+
+.error button {
+  margin-top: 10px;
+  background-color: var(--color-primary);
+}
+
+.loading {
+  text-align: center;
+  color: var(--color-secondary);
+  font-style: italic;
+}
+
+.features-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.features-card li {
+  padding: 10px;
+  background-color: rgba(0, 204, 0, 0.1);
+  border-left: 3px solid var(--color-success);
+  border-radius: 4px;
+  color: var(--color-success);
+}
+
+.app-footer {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+  color: #888;
+  font-size: 0.9em;
+}
