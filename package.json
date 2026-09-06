@@ -1,0 +1,30 @@
+{
+  "name": "one-chicago-rp-fr",
+  "version": "1.0.0",
+  "description": "ONE CHICAGO RP — Simulation RP français inspirée des services d'urgence",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=packages/server\" \"npm run dev --workspace=packages/client\"",
+    "dev:client": "npm run dev --workspace=packages/client",
+    "dev:server": "npm run dev --workspace=packages/server",
+    "build": "npm run build --workspace=packages/client && npm run build --workspace=packages/server",
+    "build:client": "npm run build --workspace=packages/client",
+    "build:server": "npm run build --workspace=packages/server",
+    "start": "npm run start --workspace=packages/server",
+    "db:setup": "npm run prisma:generate && npm run prisma:migrate",
+    "prisma:generate": "npm run prisma generate --workspace=packages/server",
+    "prisma:migrate": "npm run prisma migrate dev --workspace=packages/server",
+    "prisma:studio": "npm run prisma studio --workspace=packages/server",
+    "lint": "eslint . --ext ts,tsx",
+    "type-check": "tsc --noEmit"
+  },
+  "workspaces": [
+    "packages/client",
+    "packages/server"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "typescript": "^5.2.0"
+  }
+}
